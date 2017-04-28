@@ -11,12 +11,13 @@
  * The Recast.AI SDK will handle the message and call your reply bot function (ie. replyMessage function)
  */
 
-const recastai = require('recastai').default
+//import Recast AI SDK
+const recastai = require('recastai').default;
 
-const replyMessage = require('./message')
+const replyMessage = require('./message');
 
 // Instantiate Recast.AI SDK
-const client = new recastai(process.env.REQUEST_TOKEN)
+const client = new recastai(process.env.REQUEST_TOKEN);
 
 /*
  * Main bot function
@@ -26,6 +27,7 @@ const client = new recastai(process.env.REQUEST_TOKEN)
  * - callback: Callback is a function called by Recast.AI hosting system when your code will be hosted
  */
 export const bot = (body, response, callback) => {
+  //if the request body has a .message property
   if (body.message) {
     /*
     * Call the Recast.AI SDK function to handle message from Bot Connector
@@ -37,12 +39,13 @@ export const bot = (body, response, callback) => {
     * If you want to edit the behaviour of your code bot, depending on user input,
     * go to /src/message.js file and write your own code under "YOUR OWN CODE" comment.
     */
-    client.connect.handleMessage({ body }, response, replyMessage)
+    client.connect.handleMessage({ body }, response, replyMessage);
 
     /*
      * This function is called by Recast.AI hosting system when your code will be hosted
      */
-    callback(null, { result: 'Bot answered :)' })
+    //callback(error,success) in server.js
+    callback(null, { result: 'Bot answered :)' });
   } else if (body.text) {
     /*
     * If your request comes from the testing route
